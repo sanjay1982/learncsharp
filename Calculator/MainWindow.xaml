@@ -6,7 +6,14 @@
         xmlns:local="clr-namespace:Calculator"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+    <StackPanel>
+        <StackPanel Name="Display">
+            <Viewbox>
+            <TextBlock>Test Data 123</TextBlock>
+            </Viewbox>
+        </StackPanel>
+        <StackPanel Name="Commands">
+            
+        </StackPanel>
+    </StackPanel>
 </Window>
