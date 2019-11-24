@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Commands>
+  <Command Text="1" Value="1" Type="Literal" Key="D1" />
+  <Command Text="2" Value="2" Type="Literal" Key="D2" />
+  <Command Text="3" Value="3" Type="Literal" Key="D3" />
+  <Command Text="4" Value="4" Type="Literal" Key="D4" />
+  <Command Text="5" Value="5" Type="Literal" Key="D5" />
+  <Command Text="6" Value="6" Type="Literal" Key="D6" />
+  <Command Text="7" Value="7" Type="Literal" Key="D7" />
+  <Command Text="8" Value="8" Type="Literal" Key="D8" />
+  <Command Text="9" Value="9" Type="Literal" Key="D9" />
+  <Command Text="0" Value="0" Type="Literal" Key="D0" />
+  <Command Text="+" Value="+" Type="BinaryOperator" Key="Add" />
+  <Command Text="-" Value="-" Type="BinaryOperator" Key="Subtract" />
+  <Command Text="=" Value="=" Type="Calculate" Key="Enter" />
+</Commands>

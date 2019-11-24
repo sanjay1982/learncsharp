@@ -6,31 +6,32 @@
         xmlns:local="clr-namespace:Calculator"
         xmlns:ViewModels="clr-namespace:Calculator.ViewModels" x:Class="Calculator.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" x:Name="CalculatorMainWindow">
     <Window.DataContext>
         <ViewModels:CalculatorViewModel/>
     </Window.DataContext>
     <StackPanel>
-        <StackPanel x:Name="Display">
-            <Viewbox>
-                <TextBlock><Run Text="Test Data 123"/></TextBlock>
-            </Viewbox>
+        <StackPanel x:Name="Display" HorizontalAlignment="Right" Margin="30">
+            <TextBlock Text="{Binding CommandExecutor.Expression}" FontWeight="SemiBold" FontSize="20"></TextBlock>
+            <TextBlock Text="{Binding CommandExecutor.Value}" FontWeight="Medium" FontSize="48"></TextBlock>
         </StackPanel>
         <StackPanel x:Name="Commands">
-            <ListView x:Name="CommandsListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding Commands}">
-                <ListView.ItemsPanel>
+            <ItemsControl x:Name="CommandsListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding Commands}">
+                <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <WrapPanel Orientation="Horizontal" />
+                     
+                    <WrapPanel Orientation="Horizontal" />
                     </ItemsPanelTemplate>
-                </ListView.ItemsPanel>
-                <ListView.ItemTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Button>
+                        <Button MinWidth="50" MinHeight="50" Margin="2" Command="{Binding ElementName=CalculatorMainWindow, Path=DataContext.CommandExecutor}"
+                                CommandParameter="{Binding}">
                             <TextBlock Text="{Binding Text}" />
                         </Button>
                     </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </StackPanel>
     </StackPanel>
 </Window>
