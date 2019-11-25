@@ -1,27 +1,35 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Calculator.Functions
 {
     public abstract class BaseFunction : ICalculatorFunction
     {
+        public const int AnyNumberOfArguments = -1;
+
         protected BaseFunction(string name, int argumentCount)
         {
             Name = name;
             ArgumentCount = argumentCount;
         }
+
         public string Name { get; }
         public int ArgumentCount { get; }
 
         public virtual object Calculate(object[] arguments)
         {
-            return Calculate(arguments.Select(Convert.ToDecimal).ToArray());
+            if (arguments.Length != ArgumentCount) return null;
+            return arguments.Any(x => x is float || x is decimal)
+                ? Calculate(arguments.Select(Convert.ToDouble).ToArray())
+                : Calculate(arguments.Select(Convert.ToInt64).ToArray());
         }
 
-        public virtual decimal Calculate(decimal[] arguments)
+        public virtual object Calculate(double[] arguments)
+        {
+            return 0.0;
+        }
+
+        public virtual object Calculate(long[] arguments)
         {
             return 0;
         }

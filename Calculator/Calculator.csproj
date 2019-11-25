@@ -61,7 +61,6 @@
     <Compile Include="ViewModels\CalculatorViewModel.cs" />
     <Compile Include="ViewModels\Command.cs" />
     <Compile Include="ViewModels\ExpressionBuilder.cs" />
-    <Compile Include="ViewModels\LiteralBuilder.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

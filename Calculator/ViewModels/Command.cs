@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Reflection;
 using System.Windows.Input;
 using System.Xml.Serialization;
 
@@ -14,23 +12,6 @@ namespace Calculator.ViewModels
         [XmlElement(ElementName = "Command")] public List<Command> CommandList { get; set; }
     }
 
-    public class FunctionInfo
-    {
-        public MethodInfo MethodInfo
-        {
-            get;
-            set;
-        }
-        public object Context { get; set; }
-        public string Name { get; set; }
-        public int ArgumentCount => MethodInfo?.GetParameters().Length ?? 0;
-
-        public object Invoke(IEnumerable<object> arguments)
-        {
-            return MethodInfo?.Invoke(Context, arguments.ToArray());
-        }
-
-    }
     public class Command
     {
         [XmlAttribute] public string Text { get; set; }
@@ -40,8 +21,6 @@ namespace Calculator.ViewModels
         [XmlAttribute(AttributeName = "Key")] public Key KeyBoardKey { get; set; }
 
         [XmlAttribute] public string Value { get; set; }
-
-        [XmlAttribute] public string FunctionName { get; set; }
     }
 
     public class CommandExecutor : ICommand, INotifyPropertyChanged
@@ -107,8 +86,6 @@ namespace Calculator.ViewModels
     public enum CommandType
     {
         Literal,
-        UnaryOperator,
-        BinaryOperator,
-        Calculate
+        Function
     }
 }
