@@ -1,31 +1,33 @@
 ﻿<Window
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Calculator"
-        xmlns:ViewModels="clr-namespace:Calculator.ViewModels" x:Class="Calculator.MainWindow"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" x:Name="CalculatorMainWindow">
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:Calculator"
+    xmlns:ViewModels="clr-namespace:Calculator.ViewModels" x:Class="Calculator.MainWindow"
+    mc:Ignorable="d"
+    Title="MainWindow" Height="450" Width="800" x:Name="CalculatorMainWindow">
     <Window.DataContext>
-        <ViewModels:CalculatorViewModel/>
+        <ViewModels:CalculatorViewModel />
     </Window.DataContext>
     <StackPanel>
         <StackPanel x:Name="Display" HorizontalAlignment="Right" Margin="30">
-            <TextBlock Text="{Binding CommandExecutor.Expression}" FontWeight="SemiBold" FontSize="20"></TextBlock>
-            <TextBlock Text="{Binding CommandExecutor.Value}" FontWeight="Medium" FontSize="48"></TextBlock>
+            <TextBlock Text="{Binding CommandExecutor.Expression}" FontWeight="SemiBold" FontSize="20" />
+            <TextBlock Text="{Binding CommandExecutor.Value}" FontWeight="Medium" FontSize="48" />
         </StackPanel>
         <StackPanel x:Name="Commands">
-            <ItemsControl x:Name="CommandsListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding Commands}">
+            <ItemsControl x:Name="CommandsListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                          ItemsSource="{Binding Commands}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                     
-                    <WrapPanel Orientation="Horizontal" />
+
+                        <WrapPanel Orientation="Horizontal" />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Button MinWidth="50" MinHeight="50" Margin="2" Command="{Binding ElementName=CalculatorMainWindow, Path=DataContext.CommandExecutor}"
+                        <Button MinWidth="50" MinHeight="50" Margin="2"
+                                Command="{Binding ElementName=CalculatorMainWindow, Path=DataContext.CommandExecutor}"
                                 CommandParameter="{Binding}">
                             <TextBlock Text="{Binding Text}" />
                         </Button>

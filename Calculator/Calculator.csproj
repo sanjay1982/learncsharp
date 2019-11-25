@@ -55,8 +55,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Functions\ICalculatorFunction.cs" />
+    <Compile Include="Functions\SignChange.cs" />
+    <Compile Include="Functions\BaseFunction.cs" />
     <Compile Include="ViewModels\CalculatorViewModel.cs" />
     <Compile Include="ViewModels\Command.cs" />
+    <Compile Include="ViewModels\ExpressionBuilder.cs" />
+    <Compile Include="ViewModels\LiteralBuilder.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -101,5 +106,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

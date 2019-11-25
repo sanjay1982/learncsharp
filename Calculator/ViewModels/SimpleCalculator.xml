@@ -1,4 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <Commands>
   <Command Text="1" Value="1" Type="Literal" Key="D1" />
   <Command Text="2" Value="2" Type="Literal" Key="D2" />
