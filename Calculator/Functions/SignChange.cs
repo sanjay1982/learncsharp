@@ -89,7 +89,7 @@ namespace Calculator.Functions
 
     public class Equal : BaseFunction
     {
-        public Equal() : base("=", 1)
+        public Equal() : base("=", 0)
         {
         }
 

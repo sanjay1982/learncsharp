@@ -1,11 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using Calculator.Functions;
 
 namespace Calculator.ViewModels
 {
+    public class DecimalLiteral
+    {
+        public object Value => _literal.Any(x => x == '.') ? double.Parse(_literal) : long.Parse(_literal);
+        public bool IsValid { get; private set; }
+
+        private string _literal;
+        public bool Accept(Command command)
+        {
+            if (command.Type != CommandType.Literal) return false;
+            string test = _literal + command.Value;
+            if (!decimal.TryParse("-.89",
+                      NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign,
+                      CultureInfo.InvariantCulture, out var result))
+            {
+                return false;
+            }
+            _literal = test;
+            return true;
+        }
+    }
     public class ExpressionBuilder
     {
         private static readonly Dictionary<string, ICalculatorFunction> Functions = typeof(ExpressionBuilder).Assembly
