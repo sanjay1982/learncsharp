@@ -11,7 +11,11 @@
   <Command Text="8" Value="8" Type="Literal" Key="D8" />
   <Command Text="9" Value="9" Type="Literal" Key="D9" />
   <Command Text="0" Value="0" Type="Literal" Key="D0" />
-  <Command Text="+" Value="+" Type="BinaryOperator" Key="Add" />
-  <Command Text="-" Value="-" Type="BinaryOperator" Key="Subtract" />
-  <Command Text="=" Value="=" Type="Calculate" Key="Enter" />
+  <Command Text="." Value="." Type="Literal" Key="Decimal" />
+  <Command Text="+" Value="+" Type="Function" Key="Add" />
+  <Command Text="-" Value="-" Type="Function" Key="Subtract" />
+  <Command Text="*" Value="*" Type="Function" Key="Multiply" />
+  <Command Text="/" Value="/" Type="Function" Key="Divide" />
+  <Command Text="+/-" Value="+/-" Type="Function" Key="None" />
+  <Command Text="=" Value="=" Type="Function" Key="Enter" />
 </Commands>

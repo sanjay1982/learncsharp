@@ -38,7 +38,7 @@ namespace Calculator.Functions
 
     public class Subtract : BaseFunction
     {
-        public Subtract() : base("+", 2)
+        public Subtract() : base("-", 2)
         {
         }
 
@@ -55,7 +55,7 @@ namespace Calculator.Functions
 
     public class Multiply : BaseFunction
     {
-        public Multiply() : base("+", 2)
+        public Multiply() : base("*", 2)
         {
         }
 
@@ -72,7 +72,7 @@ namespace Calculator.Functions
 
     public class Divide : BaseFunction
     {
-        public Divide() : base("+", 2)
+        public Divide() : base("/", 2)
         {
         }
 

@@ -7,8 +7,24 @@ using Calculator.Functions;
 
 namespace Calculator.ViewModels
 {
-    public class DecimalLiteral
+    public interface ICommandAcceptor
     {
+        bool Accept(Command command);
+    }
+    public class DecimalLiteral : ICommandAcceptor
+    {
+        public DecimalLiteral()
+        {
+            _literal = "0";
+        }
+        public DecimalLiteral(object value) : this()
+        {
+            var test = value.ToString();
+            if (Validate(test))
+            {
+                _literal = test;
+            }
+        }
         public object Value => _literal.Any(x => x == '.') ? double.Parse(_literal) : long.Parse(_literal);
         public bool IsValid { get; private set; }
 
@@ -17,17 +33,25 @@ namespace Calculator.ViewModels
         {
             if (command.Type != CommandType.Literal) return false;
             string test = _literal + command.Value;
-            if (!decimal.TryParse("-.89",
-                      NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign,
-                      CultureInfo.InvariantCulture, out var result))
+            if (test.Length > 1 && test.First() == '0')
+            {
+                test = test.Substring(1);
+            }
+            if (!Validate(test))
             {
                 return false;
             }
             _literal = test;
             return true;
         }
+        private bool Validate(string literal)
+        {
+            return decimal.TryParse(literal,
+                      NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign,
+                      CultureInfo.InvariantCulture, out var result);
+        }
     }
-    public class ExpressionBuilder
+    public class ExpressionBuilder : ICommandAcceptor
     {
         private static readonly Dictionary<string, ICalculatorFunction> Functions = typeof(ExpressionBuilder).Assembly
             .GetTypes().Where(x => x.GetInterfaces().Contains(typeof(ICalculatorFunction)) && !x.IsAbstract)
@@ -35,55 +59,46 @@ namespace Calculator.ViewModels
                 Expression.New(y.GetConstructor(Type.EmptyTypes))
             ).Compile().Invoke()).ToDictionary(z => z.Name, z => z);
 
-        private string _lastLiteral = "";
-        public string ExpressionString { get; set; }
-        public string Value { get; set; }
-
         public ICalculatorFunction Function { get; set; }
-        public List<object> Literals { get; set; }
-
-        private bool CheckOrAccept(Command command, bool accept)
-        {
-            var status = false;
-            if (command.Type == CommandType.Function)
-            {
-                status =
-                    Functions.TryGetValue(command.Value, out var function) && !string.IsNullOrEmpty(_lastLiteral);
-
-                if (accept && status)
-                {
-                    Literals.Add(_lastLiteral.Any(x => x == '.')
-                        ? Convert.ToDouble(_lastLiteral)
-                        : Convert.ToInt64(_lastLiteral));
-                    if (function.ArgumentCount == Literals.Count)
-                    {
-                        _lastLiteral = Value = Convert.ToString(function.Calculate(Literals.ToArray()));
-                        Literals.Clear();
-                    }
-                }
-            }
-            else
-            {
-                status = string.IsNullOrEmpty(_lastLiteral) ||
-                         command.Value == "0" && _lastLiteral.Any(x => x != '0') ||
-                         command.Value == "." && _lastLiteral.All(x => x != '.');
-                if (accept && status)
-                    _lastLiteral = string.Concat(_lastLiteral,
-                        string.IsNullOrEmpty(_lastLiteral) && command.Value == "." ? "0" : "", command.Value);
-            }
-
-            return status;
-        }
-
+        public List<DecimalLiteral> Literals { get; set; } = new List<DecimalLiteral> { new DecimalLiteral() };
+        private DecimalLiteral CurrentLiteral => Literals.Last();
+        public string ExpressionString { get; private set; }
+        public string Value => CurrentLiteral.Value.ToString();
         public bool Accept(Command command)
         {
             if (command.Type == CommandType.Function)
             {
-                if (!Functions.TryGetValue(command.Value, out var function) || Literals.Count != 1) return false;
-                return Literals.Count == 1;
+                if (!Functions.TryGetValue(command.Value, out var function)) return false;
+                RunFunction();
+                Function = function;
+                RunFunction(true);
+            }
+            else
+            {
+                if (!CurrentLiteral.Accept(command))
+                {
+                    return false;
+                }
             }
 
+            ExpressionString += command.Text;
             return true;
+        }
+
+        private void RunFunction(bool addLiteral = false)
+        {
+            if (Function != null)
+            {
+                if (Literals.Count >= Function.ArgumentCount)
+                {
+                    Literals = new List<DecimalLiteral> { new DecimalLiteral(Function.Calculate(Literals.Select(x => x.Value).ToArray())) };
+                    Function = null;
+                }
+                else if(addLiteral)
+                {
+                    Literals.Add(new DecimalLiteral());
+                }
+            }
         }
     }
 }

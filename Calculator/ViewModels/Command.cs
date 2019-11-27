@@ -26,9 +26,7 @@ namespace Calculator.ViewModels
     public class CommandExecutor : ICommand, INotifyPropertyChanged
     {
         private bool _enabled = true;
-        private string _expression;
-        private string _value;
-
+        private ExpressionBuilder _expressionBuilder = new ExpressionBuilder();
         public bool Enabled
         {
             get => _enabled;
@@ -40,25 +38,9 @@ namespace Calculator.ViewModels
             }
         }
 
-        public string Expression
-        {
-            get => _expression;
-            set
-            {
-                _expression = value;
-                OnPropertyChanged(nameof(Expression));
-            }
-        }
+        public string Expression => _expressionBuilder.ExpressionString;
 
-        public string Value
-        {
-            get => _value;
-            set
-            {
-                _value = value;
-                OnPropertyChanged(nameof(Value));
-            }
-        }
+        public string Value => _expressionBuilder.Value;
 
         public event EventHandler CanExecuteChanged;
 
@@ -70,7 +52,11 @@ namespace Calculator.ViewModels
         public void Execute(object parameter)
         {
             if (!(parameter is Command command)) return;
-            Expression += command.Value;
+            if (_expressionBuilder.Accept(command))
+            {
+                OnPropertyChanged(nameof(Expression));
+                OnPropertyChanged(nameof(Value));
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
