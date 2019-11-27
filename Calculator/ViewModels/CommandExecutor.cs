@@ -1,32 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Input;
-using System.Xml.Serialization;
+using Calculator.BLL;
 
 namespace Calculator.ViewModels
 {
-    [XmlRoot(ElementName = "Commands")]
-    public class Commands
-    {
-        [XmlElement(ElementName = "Command")] public List<Command> CommandList { get; set; }
-    }
-
-    public class Command
-    {
-        [XmlAttribute] public string Text { get; set; }
-
-        [XmlAttribute] public CommandType Type { get; set; }
-
-        [XmlAttribute(AttributeName = "Key")] public Key KeyBoardKey { get; set; }
-
-        [XmlAttribute] public string Value { get; set; }
-    }
-
     public class CommandExecutor : ICommand, INotifyPropertyChanged
     {
         private bool _enabled = true;
-        private ExpressionBuilder _expressionBuilder = new ExpressionBuilder();
+        private readonly ExpressionBuilder _expressionBuilder = new ExpressionBuilder();
+
         public bool Enabled
         {
             get => _enabled;
@@ -67,11 +50,5 @@ namespace Calculator.ViewModels
             var handler = PropertyChanged;
             handler?.Invoke(this, new PropertyChangedEventArgs(name));
         }
-    }
-
-    public enum CommandType
-    {
-        Literal,
-        Function
     }
 }

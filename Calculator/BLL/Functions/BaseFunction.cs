@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace Calculator.Functions
+namespace Calculator.BLL.Functions
 {
     public abstract class BaseFunction : ICalculatorFunction
     {
@@ -19,7 +19,7 @@ namespace Calculator.Functions
         public virtual object Calculate(object[] arguments)
         {
             if (arguments.Length != ArgumentCount) return null;
-            return arguments.Any(x => x is float || x is decimal)
+            return arguments.Any(x => x is float || x is decimal || x is double)
                 ? Calculate(arguments.Select(Convert.ToDouble).ToArray())
                 : Calculate(arguments.Select(Convert.ToInt64).ToArray());
         }

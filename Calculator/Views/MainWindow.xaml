@@ -4,7 +4,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="clr-namespace:Calculator"
-    xmlns:ViewModels="clr-namespace:Calculator.ViewModels" x:Class="Calculator.MainWindow"
+    xmlns:ViewModels="clr-namespace:Calculator.ViewModels" x:Class="Calculator.Views.MainWindow"
     mc:Ignorable="d"
     Title="MainWindow" Height="450" Width="800" x:Name="CalculatorMainWindow">
     <Window.DataContext>

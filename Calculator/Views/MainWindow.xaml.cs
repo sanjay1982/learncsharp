@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace Calculator
+namespace Calculator.Views
 {
     /// <summary>
     ///     Interaction logic for MainWindow.xaml

@@ -1,4 +1,4 @@
-﻿namespace Calculator.Functions
+﻿namespace Calculator.BLL.Functions
 {
     public interface ICalculatorFunction
     {
