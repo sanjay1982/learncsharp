@@ -15,44 +15,77 @@ namespace Calculator.BLL
             ).Compile().Invoke()).ToDictionary(z => z.Name, z => z);
 
         public ICalculatorFunction Function { get; set; }
-        public List<DecimalLiteral> Literals { get; set; } = new List<DecimalLiteral> { new DecimalLiteral() };
-        private DecimalLiteral CurrentLiteral => Literals.Last();
+        public List<DecimalLiteral> Literals { get; set; } = new List<DecimalLiteral> {  };
+        private DecimalLiteral _currentLiteral;
         public string ExpressionString { get; private set; }
-        public string Value => CurrentLiteral.Value.ToString();
-
+        public string Value => _currentLiteral?.Value.ToString() ?? Literals.LastOrDefault()?.Value.ToString() ?? "0";
+        private int LiteralCount => Literals.Count + (_currentLiteral == null ? 0 : 1);
+        private bool _reset = false;
         public bool Accept(Command command)
         {
             if (command.Type == CommandType.Function)
             {
                 if (!Functions.TryGetValue(command.Value, out var function)) return false;
-                RunFunction();
-                Function = function;
-                RunFunction(true);
+                if(RunCurrentFunction() &&
+                RunNewFunction(command, function))
+                {
+                    return true;
+                }
             }
             else
             {
-                if (!CurrentLiteral.Accept(command)) return false;
+                if (_reset)
+                {
+                    Literals.Clear();
+                    _currentLiteral = null;
+                    _reset = false;
+                }
+                _currentLiteral = _currentLiteral ?? new DecimalLiteral();
+                if (!_currentLiteral.Accept(command)) return false;
+                ExpressionString += command.Text;
             }
 
-            ExpressionString += command.Text;
+            return true;
+        }
+        private bool RunCurrentFunction()
+        {
+            if (Function == null) return true;
+            if(LiteralCount < Function.ArgumentCount) return false;
+            CalculateFunction(Function);
+            ExpressionString = $"({ExpressionString})";
             return true;
         }
 
-        private void RunFunction(bool addLiteral = false)
+        private void CalculateFunction(ICalculatorFunction function)
         {
-            if (Function == null) return;
-            if (Literals.Count >= Function.ArgumentCount)
+            if(_currentLiteral != null)
             {
-                var value = new DecimalLiteral(Function.Calculate(Literals.Select(x => x.Value).ToArray()));
-                //ExpressionString += "="+value.Value.ToString();
-                Literals = new List<DecimalLiteral>
-                    {value};
-                Function = null;
+                Literals.Add(_currentLiteral);
+                _currentLiteral = null;
             }
-            else if (addLiteral)
+            var value = new DecimalLiteral(function.Calculate(Literals.Select(x => x.Value).ToArray()));
+            Literals.Clear();
+            Literals.Add(value);
+        }
+
+        private bool RunNewFunction(Command command, ICalculatorFunction function)
+        {
+            if (function == null) return false;
+            Function = null;
+            if (LiteralCount >= function.ArgumentCount)
             {
-                Literals.Add(new DecimalLiteral());
+                CalculateFunction(function);
+                ExpressionString = Value.ToString();
+               // _reset = true;
             }
+            else
+            {
+                Function = function;
+                if(_currentLiteral != null) Literals.Add(_currentLiteral);
+                ExpressionString += command.Text;
+                _currentLiteral = null;
+            }
+            return true;
         }
     }
 }

@@ -18,4 +18,6 @@
   <Command Text="/" Value="/" Type="Function" Key="Divide" />
   <Command Text="+/-" Value="+/-" Type="Function" Key="None" />
   <Command Text="=" Value="=" Type="Function" Key="Enter" />
+
+  <Command Text="C" Value="Clear" Type="Function" Key="Escape" />
 </Commands>
