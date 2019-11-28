@@ -24,20 +24,11 @@ namespace Calculator.BLL
         {
             if (command.Type != CommandType.Literal) return false;
             var test = _literal + command.Value;
-            if (test.Length > 1 && test.First() == '0' && test != "0.")
-            {
-                test = test.Substring(1);
-            }
+            if (test.Length > 1 && test.First() == '0' && test != "0.") test = test.Substring(1);
 
-            if (test.StartsWith("."))
-            {
-                test = "0" + test;
-            }
+            if (test.StartsWith(".")) test = "0" + test;
 
-            if (!Validate(test))
-            {
-                return false;
-            }
+            if (!Validate(test)) return false;
             _literal = test;
             return true;
         }
@@ -46,7 +37,7 @@ namespace Calculator.BLL
         {
             return decimal.TryParse(literal,
                 NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign,
-                CultureInfo.InvariantCulture, out var result);
+                CultureInfo.InvariantCulture, out _);
         }
     }
 }

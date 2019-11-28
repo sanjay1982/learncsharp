@@ -5,8 +5,6 @@ namespace Calculator.BLL.Functions
 {
     public abstract class BaseFunction : ICalculatorFunction
     {
-        public const int AnyNumberOfArguments = -1;
-
         protected BaseFunction(string name, int argumentCount)
         {
             Name = name;

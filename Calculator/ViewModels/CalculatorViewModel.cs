@@ -7,7 +7,7 @@ namespace Calculator.ViewModels
 {
     public class CalculatorViewModel
     {
-        private readonly Commands _commands = new Commands();
+        private readonly Commands _commands;
 
         public CalculatorViewModel()
         {

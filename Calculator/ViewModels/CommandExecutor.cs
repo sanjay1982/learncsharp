@@ -7,8 +7,8 @@ namespace Calculator.ViewModels
 {
     public class CommandExecutor : ICommand, INotifyPropertyChanged
     {
-        private bool _enabled = true;
         private readonly ExpressionBuilder _expressionBuilder = new ExpressionBuilder();
+        private bool _enabled = true;
 
         public bool Enabled
         {
