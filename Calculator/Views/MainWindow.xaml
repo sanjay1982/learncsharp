@@ -28,8 +28,8 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Button MinWidth="50" MinHeight="50" Margin="2"
-                                Command="{Binding ElementName=CalculatorMainWindow, Path=DataContext.CommandExecutor}"
-                                CommandParameter="{Binding}">
+                                CommandParameter="{Binding}"
+                                Command="{Binding ElementName=CalculatorMainWindow, Path=DataContext.CommandExecutor}">
                             <TextBlock Text="{Binding Text}" />
                         </Button>
                     </DataTemplate>

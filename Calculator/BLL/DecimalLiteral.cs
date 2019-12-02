@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Calculator.BLL
 {
-    public class DecimalLiteral : ICommandAcceptor
+    public class DecimalLiteral : BaseCommandAcceptor
     {
         private string _literal;
 
@@ -12,25 +12,39 @@ namespace Calculator.BLL
             _literal = "0";
         }
 
-        public DecimalLiteral(object value) : this()
+        public DecimalLiteral( object value) : this()
         {
             var test = value.ToString();
             if (Validate(test)) _literal = test;
         }
 
-        public object Value => _literal.Any(x => x == '.') ? double.Parse(_literal) : long.Parse(_literal);
+        public override object Value => _literal.Any(x => x == '.') ? double.Parse(_literal) : long.Parse(_literal);
 
-        public bool Accept(Command command)
+ 
+        public override bool CanAccept(Command command)
         {
-            if (command.Type != CommandType.Literal) return false;
-            var test = _literal + command.Value;
-            if (test.Length > 1 && test.First() == '0' && test != "0.") test = test.Substring(1);
 
-            if (test.StartsWith(".")) test = "0" + test;
+            if (command.Type != CommandType.Literal) return true;
+            if (_literal == "0" && command.Value == "0") return false;
+            if (_literal.Contains(".") && command.Value == ".") return false;
+            if (_literal.Length >= 25) return false;
+            return Validate(_literal + command.Value);
 
-            if (!Validate(test)) return false;
-            _literal = test;
-            return true;
+        }
+        public override ICommandAcceptor Accept(Command command)
+        {
+            if (command.Type != CommandType.Literal) return Factory.Create(command, this);
+            if (!CanAccept(command))
+            {
+                return this;
+            }
+            _literal += command.Value;
+            if(_literal.StartsWith("."))
+            {
+                _literal = "0" + command.Value;
+            }
+            
+            return this;
         }
 
         private static bool Validate(string literal)
