@@ -2,10 +2,10 @@
 {
     public interface ICommandAcceptor
     {
-        bool CanAccept(Command command);
-        ICommandAcceptor Accept(Command command);
         object Value { get; }
         string ExpressionString { get; }
+        bool CanAccept(Command command);
+        ICommandAcceptor Accept(Command command);
 
         void Initialize(ICommandAcceptorFactory commandAcceptorFactory, ICommandAcceptor previousAcceptor);
     }

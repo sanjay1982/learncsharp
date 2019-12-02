@@ -74,7 +74,6 @@
     <Compile Include="BLL\Commands.cs" />
     <Compile Include="BLL\CommandType.cs" />
     <Compile Include="BLL\DecimalLiteral.cs" />
-    <Compile Include="BLL\ExpressionBuilder.cs" />
     <Compile Include="BLL\ICommandAcceptor.cs" />
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

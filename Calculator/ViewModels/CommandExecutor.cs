@@ -7,8 +7,8 @@ namespace Calculator.ViewModels
 {
     public class CommandExecutor : ICommand, INotifyPropertyChanged
     {
-        private ICommandAcceptor _commandAcceptor;
         private readonly ICommandAcceptorFactory _factory = new CommandAcceptorFactory();
+        private ICommandAcceptor _commandAcceptor;
         private bool _enabled = true;
 
         public CommandExecutor()
@@ -46,7 +46,6 @@ namespace Calculator.ViewModels
             CanExecuteChanged?.Invoke(this, EventArgs.Empty);
             OnPropertyChanged(nameof(Expression));
             OnPropertyChanged(nameof(Value));
-            
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

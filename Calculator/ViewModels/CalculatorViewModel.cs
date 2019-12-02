@@ -16,7 +16,7 @@ namespace Calculator.ViewModels
             var serializer = new XmlSerializer(typeof(Commands));
 
             var reader = new StreamReader(path);
-            _commands = (Commands)serializer.Deserialize(reader);
+            _commands = (Commands) serializer.Deserialize(reader);
         }
 
         public List<Command> Commands
