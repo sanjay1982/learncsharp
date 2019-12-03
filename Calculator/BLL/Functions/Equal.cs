@@ -1,5 +1,7 @@
 ﻿namespace Calculator.BLL.Functions
 {
+    using Contracts;
+
     public class Equal : BaseFunction
     {
         public Equal() : base("=", 1)

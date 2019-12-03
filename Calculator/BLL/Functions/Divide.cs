@@ -13,7 +13,7 @@
 
         public override object Calculate(long[] arguments)
         {
-            return arguments[0] / (double) arguments[1];
+            return arguments[0] / (double)arguments[1];
         }
     }
 }

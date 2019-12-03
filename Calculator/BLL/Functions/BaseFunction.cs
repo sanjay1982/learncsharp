@@ -4,6 +4,8 @@ using System.Linq;
 
 namespace Calculator.BLL.Functions
 {
+    using Contracts;
+
     public abstract class BaseFunction : BaseCommandAcceptor, ICalculatorFunction
     {
         private readonly List<ICommandAcceptor> _literals = new List<ICommandAcceptor>();

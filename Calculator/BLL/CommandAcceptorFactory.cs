@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Calculator.BLL.Contracts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using Calculator.BLL.Functions;
 
 namespace Calculator.BLL
 {

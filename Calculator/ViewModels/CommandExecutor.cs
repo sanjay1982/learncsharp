@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Calculator.BLL;
+using System;
 using System.ComponentModel;
 using System.Windows.Input;
-using Calculator.BLL;
 
 namespace Calculator.ViewModels
 {
+    using BLL.Contracts;
+
     public class CommandExecutor : ICommand, INotifyPropertyChanged
     {
         private readonly ICommandAcceptorFactory _factory = new CommandAcceptorFactory();

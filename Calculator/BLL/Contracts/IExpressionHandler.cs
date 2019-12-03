@@ -1,4 +1,4 @@
-﻿namespace Calculator.BLL
+﻿namespace Calculator.BLL.Contracts
 {
     internal interface IExpressionHandler
     {

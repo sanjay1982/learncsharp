@@ -61,20 +61,20 @@
     <Compile Include="BLL\Functions\Clear.cs" />
     <Compile Include="BLL\Functions\Divide.cs" />
     <Compile Include="BLL\Functions\Equal.cs" />
-    <Compile Include="BLL\Functions\ICalculatorFunction.cs" />
+    <Compile Include="BLL\Contracts\ICalculatorFunction.cs" />
     <Compile Include="BLL\Functions\Multiply.cs" />
     <Compile Include="BLL\Functions\SignChange.cs" />
     <Compile Include="BLL\Functions\BaseFunction.cs" />
     <Compile Include="BLL\Functions\Subtract.cs" />
-    <Compile Include="BLL\ICommandAcceptorFactory.cs" />
-    <Compile Include="BLL\IExpressionHandler.cs" />
+    <Compile Include="BLL\Contracts\ICommandAcceptorFactory.cs" />
+    <Compile Include="BLL\Contracts\IExpressionHandler.cs" />
     <Compile Include="ViewModels\CalculatorViewModel.cs" />
     <Compile Include="BLL\Command.cs" />
     <Compile Include="ViewModels\CommandExecutor.cs" />
     <Compile Include="BLL\Commands.cs" />
     <Compile Include="BLL\CommandType.cs" />
-    <Compile Include="BLL\DecimalLiteral.cs" />
-    <Compile Include="BLL\ICommandAcceptor.cs" />
+    <Compile Include="BLL\Literals\DecimalLiteral.cs" />
+    <Compile Include="BLL\Contracts\ICommandAcceptor.cs" />
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -115,9 +115,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ViewModels\SimpleCalculator.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <EmbeddedResource Include="ViewModels\SimpleCalculator.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

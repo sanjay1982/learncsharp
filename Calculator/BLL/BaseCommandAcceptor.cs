@@ -1,5 +1,7 @@
 ﻿namespace Calculator.BLL
 {
+    using Contracts;
+
     public abstract class BaseCommandAcceptor : ICommandAcceptor
     {
         protected ICommandAcceptorFactory Factory { get; private set; }

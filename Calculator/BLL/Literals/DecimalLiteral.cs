@@ -1,8 +1,10 @@
 ﻿using System.Globalization;
 using System.Linq;
 
-namespace Calculator.BLL
+namespace Calculator.BLL.Literals
 {
+    using Contracts;
+
     public class DecimalLiteral : BaseCommandAcceptor
     {
         private string _literal;
@@ -19,7 +21,6 @@ namespace Calculator.BLL
         }
 
         public override object Value => _literal.Any(x => x == '.') ? double.Parse(_literal) : long.Parse(_literal);
-
 
         public override bool CanAccept(Command command)
         {
