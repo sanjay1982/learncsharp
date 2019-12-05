@@ -9,13 +9,14 @@ namespace Calculator.ViewModels
 
     public class CommandExecutor : ICommand, INotifyPropertyChanged
     {
-        private readonly ICommandAcceptorFactory _factory = new CommandAcceptorFactory();
+        private readonly ICommandAcceptorFactory _factory;
         private ICommandAcceptor _commandAcceptor;
         private bool _enabled = true;
 
         public CommandExecutor()
         {
-            _commandAcceptor = _factory.CreateLiteral();
+            _factory = new CommandAcceptorFactory();
+            _commandAcceptor = _factory.CreateLiteral(null);
         }
 
         public bool Enabled

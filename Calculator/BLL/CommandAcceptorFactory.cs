@@ -13,42 +13,44 @@ namespace Calculator.BLL
             .GetTypes().Where(x =>
                 x.GetInterfaces().Contains(typeof(ICommandAcceptor)) &&
                 x.GetInterfaces().Contains(typeof(ICalculatorFunction)) && !x.IsAbstract)
-            .Select(y => Expression.Lambda<Func<ICalculatorFunction>>(
-                Expression.New(y.GetConstructor(Type.EmptyTypes) ?? throw new InvalidOperationException())
-            ).Compile()).ToDictionary(z => z.Invoke().Name, z => z);
+            .Select(y =>
+            {
+                Func<ICalculatorFunction> func = () => { return y.GetInstance() as ICalculatorFunction; };
+                return func;
+            }).ToDictionary(z => z.Invoke().Name, z => z);
 
-        private static readonly List<Func<ICommandAcceptor>> Literals = typeof(CommandAcceptorFactory).Assembly
+        private static readonly List<Func<object, ICommandAcceptor>> Literals = typeof(CommandAcceptorFactory).Assembly
             .GetTypes().Where(x =>
                 x.GetInterfaces().Contains(typeof(ICommandAcceptor)) &&
                 !x.GetInterfaces().Contains(typeof(ICalculatorFunction)) && !x.IsAbstract)
-            .Select(y => Expression.Lambda<Func<ICommandAcceptor>>(
-                Expression.New(y.GetConstructor(Type.EmptyTypes) ?? throw new InvalidOperationException())
-            ).Compile()).ToList();
+            .Select(y =>
+            {
+                Func<object, ICommandAcceptor> func = (param) => { return y.GetInstance<object>(param) as ICommandAcceptor; };
+                return func;
+            }).ToList();
 
         public ICommandAcceptor Create(Command command, ICommandAcceptor previousAcceptor)
         {
             if (command.Type == CommandType.Function)
             {
-                if (Functions.TryGetValue(command.Value, out var factory)) return Create(factory, previousAcceptor);
+                if (Functions.TryGetValue(command.Value, out var factory)) return Initialize(factory.Invoke() as ICommandAcceptor, previousAcceptor);
             }
             else
             {
-                return Create(Literals.First(), previousAcceptor);
+                return Initialize(Literals.First().Invoke(null), previousAcceptor);
             }
 
             return null;
         }
 
-        public ICommandAcceptor CreateLiteral()
+        public ICommandAcceptor CreateLiteral(object value)
         {
-            return Create(Literals.First());
+            return Initialize(Literals.First().Invoke(value));
         }
 
-        private ICommandAcceptor Create<T>(Func<T> factory, ICommandAcceptor previousAcceptor = null) where T : class
+        private ICommandAcceptor Initialize(ICommandAcceptor commandAcceptor, ICommandAcceptor previousAcceptor = null)
         {
-            var commandAcceptor = factory?.Invoke() as ICommandAcceptor;
-            commandAcceptor.Initialize(this, previousAcceptor);
-            return commandAcceptor;
+            return commandAcceptor.Initialize(this, previousAcceptor);
         }
     }
 }

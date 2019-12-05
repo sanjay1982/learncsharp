@@ -68,6 +68,7 @@
     <Compile Include="BLL\Functions\Subtract.cs" />
     <Compile Include="BLL\Contracts\ICommandAcceptorFactory.cs" />
     <Compile Include="BLL\Contracts\IExpressionHandler.cs" />
+    <Compile Include="BLL\TypeExtensions.cs" />
     <Compile Include="ViewModels\CalculatorViewModel.cs" />
     <Compile Include="BLL\Command.cs" />
     <Compile Include="ViewModels\CommandExecutor.cs" />

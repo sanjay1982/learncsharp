@@ -4,7 +4,6 @@
     {
         string Name { get; }
         int ArgumentCount { get; }
-
-        object Calculate(object[] arguments);
+        
     }
 }

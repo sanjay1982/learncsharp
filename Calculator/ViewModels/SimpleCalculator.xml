@@ -12,12 +12,12 @@
   <Command Text="9" Value="9" Type="Literal" Key="D9" />
   <Command Text="0" Value="0" Type="Literal" Key="D0" />
   <Command Text="." Value="." Type="Literal" Key="Decimal" />
-  <Command Text="+" Value="+" Type="Function" Key="Add" />
-  <Command Text="-" Value="-" Type="Function" Key="Subtract" />
-  <Command Text="*" Value="*" Type="Function" Key="Multiply" />
-  <Command Text="/" Value="/" Type="Function" Key="Divide" />
-  <Command Text="+/-" Value="+/-" Type="Function" Key="None" />
-  <Command Text="=" Value="=" Type="Function" Key="Enter" />
+  <Command Text="+" Value="+" Type="Function" Key="Add" ArgumentCount="2" />
+  <Command Text="-" Value="-" Type="Function" Key="Subtract" ArgumentCount="2"  />
+  <Command Text="*" Value="*" Type="Function" Key="Multiply" ArgumentCount="2" />
+  <Command Text="/" Value="/" Type="Function" Key="Divide" ArgumentCount="2" />
+  <Command Text="+/-" Value="+/-" Type="Function" Key="None" ArgumentCount="1" />
+  <Command Text="=" Value="=" Type="Function" Key="Enter" ArgumentCount="0" />
 
   <Command Text="C" Value="Clear" Type="Function" Key="Escape" />
 </Commands>

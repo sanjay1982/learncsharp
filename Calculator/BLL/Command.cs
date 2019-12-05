@@ -12,5 +12,7 @@ namespace Calculator.BLL
         [XmlAttribute(AttributeName = "Key")] public Key KeyBoardKey { get; set; }
 
         [XmlAttribute] public string Value { get; set; }
+
+        [XmlAttribute] public int ArgumentCount { get; set; } = 0;
     }
 }

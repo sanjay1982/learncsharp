@@ -12,16 +12,17 @@
 
         public abstract ICommandAcceptor Accept(Command command);
 
-        public void Initialize(ICommandAcceptorFactory commandAcceptorFactory, ICommandAcceptor previousAcceptor)
+        public ICommandAcceptor Initialize(ICommandAcceptorFactory commandAcceptorFactory, ICommandAcceptor previousAcceptor)
         {
             Factory = commandAcceptorFactory;
-            OnInitialize(previousAcceptor);
+            return OnInitialize(previousAcceptor);
         }
 
         public abstract bool CanAccept(Command command);
 
-        protected virtual void OnInitialize(ICommandAcceptor previousAcceptor)
+        protected virtual ICommandAcceptor OnInitialize(ICommandAcceptor previousAcceptor)
         {
+            return this;
         }
     }
 }

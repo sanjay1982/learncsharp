@@ -16,7 +16,7 @@
         public override ICommandAcceptor Accept(Command command)
         {
             if (command.Type != CommandType.Literal) return this;
-            var newCommandAcceptor = Factory.CreateLiteral();
+            var newCommandAcceptor = Factory.CreateLiteral(null);
             newCommandAcceptor.Accept(command);
             return newCommandAcceptor;
         }

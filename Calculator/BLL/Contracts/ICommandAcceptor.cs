@@ -9,6 +9,6 @@
 
         ICommandAcceptor Accept(Command command);
 
-        void Initialize(ICommandAcceptorFactory commandAcceptorFactory, ICommandAcceptor previousAcceptor);
+        ICommandAcceptor Initialize(ICommandAcceptorFactory commandAcceptorFactory, ICommandAcceptor previousAcceptor);
     }
 }

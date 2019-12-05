@@ -8,9 +8,9 @@ namespace Calculator.BLL.Functions
 
     public abstract class BaseFunction : BaseCommandAcceptor, ICalculatorFunction
     {
-        private readonly List<ICommandAcceptor> _literals = new List<ICommandAcceptor>();
-        private int _completedLiterals;
-        private object _value;
+        protected readonly List<ICommandAcceptor> _literals = new List<ICommandAcceptor>();
+        protected int _completedLiterals;
+        protected object _value;
 
         protected BaseFunction(string name, int argumentCount)
         {
@@ -22,8 +22,8 @@ namespace Calculator.BLL.Functions
         public override object Value => _value ?? _literals.LastOrDefault()?.Value ?? "0";
         public string Name { get; }
         public int ArgumentCount { get; }
-
-        public virtual object Calculate(object[] arguments)
+        protected object Calculate() => Calculate(_literals.Select(x => x.Value).ToArray());
+        protected virtual object Calculate(object[] arguments)
         {
             if (arguments.Length != ArgumentCount) return null;
             return arguments.Any(x => x is float || x is decimal || x is double)
@@ -31,19 +31,20 @@ namespace Calculator.BLL.Functions
                 : Calculate(arguments.Select(Convert.ToInt64).ToArray());
         }
 
-        public virtual object Calculate(double[] arguments)
+        protected virtual object Calculate(double[] arguments)
         {
             return 0.0;
         }
 
-        public virtual object Calculate(long[] arguments)
+        protected virtual object Calculate(long[] arguments)
         {
             return 0;
         }
 
         public override bool CanAccept(Command command)
         {
-            if (ArgumentCount > _literals.Count && command.Type != CommandType.Literal) return false;
+            if (command == null) return false;
+            if (ArgumentCount > _literals.Count && command.Type != CommandType.Literal) return command.ArgumentCount == 1;
             return true;
         }
 
@@ -52,13 +53,12 @@ namespace Calculator.BLL.Functions
             if (!CanAccept(command)) return this;
             if (command.Type != CommandType.Literal)
             {
-                if (_literals.Count < ArgumentCount)
+                if (command.ArgumentCount == 1)
                 {
-                    _literals.Add(Factory.Create(command, this));
-                    _completedLiterals++;
+                   _literals[_literals.Count-1]=Factory.Create(command, _literals.LastOrDefault());
+                    return this;
                 }
-
-                _value = Calculate(_literals.Select(x => x.Value).ToArray());
+                _value = Calculate();
                 return Factory.Create(command, this);
             }
 
@@ -69,11 +69,25 @@ namespace Calculator.BLL.Functions
             return this;
         }
 
-        protected override void OnInitialize(ICommandAcceptor previousAcceptor)
+        protected override ICommandAcceptor OnInitialize(ICommandAcceptor previousAcceptor)
         {
-            if (ArgumentCount == 0) return;
+            if (ArgumentCount == 0) return Factory.CreateLiteral(0);
             _literals.Add(previousAcceptor);
             _completedLiterals = 1;
+            return this;
+        }
+    }
+    public abstract class SingleArgumentFunction : BaseFunction
+    {
+        protected SingleArgumentFunction(string name, int argumentCount) : base(name, argumentCount)
+        {
+        }
+
+        protected override ICommandAcceptor OnInitialize(ICommandAcceptor previousAcceptor)
+        {
+            _literals.Add(previousAcceptor);
+            _completedLiterals = 1;
+            return Factory.CreateLiteral(Calculate());
         }
     }
 }

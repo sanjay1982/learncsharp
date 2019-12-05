@@ -16,7 +16,7 @@ namespace Calculator.BLL.Literals
 
         public DecimalLiteral(object value) : this()
         {
-            var test = value.ToString();
+            var test = value?.ToString() ?? "0";
             if (Validate(test)) _literal = test;
         }
 

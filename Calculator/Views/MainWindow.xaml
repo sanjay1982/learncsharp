@@ -5,12 +5,12 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="clr-namespace:Calculator.ViewModels" x:Class="Calculator.Views.MainWindow"
     mc:Ignorable="d"
-    Title="MainWindow" Height="450" Width="388.43" x:Name="CalculatorMainWindow"  ResizeMode="NoResize">
+    Title="MainWindow" x:Name="CalculatorMainWindow" >
     <Window.DataContext>
         <viewModels:CalculatorViewModel />
     </Window.DataContext>
     <Viewbox>
-        <StackPanel Margin="30">
+        <StackPanel Margin="5">
             <StackPanel x:Name="Display" HorizontalAlignment="Left" Margin="10,0,0,0">
                 <TextBlock Text="{Binding CommandExecutor.Expression}" FontWeight="SemiBold" FontSize="20"
                        HorizontalAlignment="Left" Width="Auto" />

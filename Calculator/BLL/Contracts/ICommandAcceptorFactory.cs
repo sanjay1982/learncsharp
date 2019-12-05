@@ -4,6 +4,6 @@
     {
         ICommandAcceptor Create(Command command, ICommandAcceptor current);
 
-        ICommandAcceptor CreateLiteral();
+        ICommandAcceptor CreateLiteral(object vlaue);
     }
 }
