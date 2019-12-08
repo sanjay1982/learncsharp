@@ -13,6 +13,6 @@ namespace Calculator.BLL
 
         [XmlAttribute] public string Value { get; set; }
 
-        [XmlAttribute] public int ArgumentCount { get; set; } = 0;
+        [XmlAttribute] public int ArgumentCount { get; set; }
     }
 }

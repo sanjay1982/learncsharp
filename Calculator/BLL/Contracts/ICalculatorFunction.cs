@@ -3,7 +3,5 @@
     public interface ICalculatorFunction
     {
         string Name { get; }
-        int ArgumentCount { get; }
-        
     }
 }

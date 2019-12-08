@@ -5,7 +5,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="clr-namespace:Calculator.ViewModels" x:Class="Calculator.Views.MainWindow"
     mc:Ignorable="d"
-    Title="MainWindow" x:Name="CalculatorMainWindow" >
+    Title="MainWindow" x:Name="CalculatorMainWindow">
     <Window.DataContext>
         <viewModels:CalculatorViewModel />
     </Window.DataContext>
@@ -13,13 +13,13 @@
         <StackPanel Margin="5">
             <StackPanel x:Name="Display" HorizontalAlignment="Left" Margin="10,0,0,0">
                 <TextBlock Text="{Binding CommandExecutor.Expression}" FontWeight="SemiBold" FontSize="20"
-                       HorizontalAlignment="Left" Width="Auto" />
+                           HorizontalAlignment="Left" Width="Auto" />
                 <TextBlock Text="{Binding CommandExecutor.Value}" FontWeight="Medium" FontSize="48"
-                       HorizontalAlignment="Left" />
+                           HorizontalAlignment="Left" />
             </StackPanel>
             <StackPanel x:Name="Commands" HorizontalAlignment="Center">
                 <ItemsControl x:Name="CommandsListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                          ItemsSource="{Binding Commands}">
+                              ItemsSource="{Binding Commands}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
 
@@ -30,13 +30,13 @@
                         <DataTemplate>
 
                             <Button MinWidth="50" MinHeight="50" Margin="2"
-                                CommandParameter="{Binding}"
-                                Command="{Binding ElementName=CalculatorMainWindow, Path=DataContext.CommandExecutor}">
+                                    CommandParameter="{Binding}"
+                                    Command="{Binding ElementName=CalculatorMainWindow, Path=DataContext.CommandExecutor}">
                                 <TextBlock Text="{Binding Text}" />
                                 <Button.InputBindings>
-                                    <KeyBinding Key="{Binding KeyBoardKey}" 
-                                CommandParameter="{Binding}"
-                                Command="{Binding ElementName=CalculatorMainWindow, Path=DataContext.CommandExecutor}" />
+                                    <KeyBinding Key="{Binding KeyBoardKey}"
+                                                CommandParameter="{Binding}"
+                                                Command="{Binding ElementName=CalculatorMainWindow, Path=DataContext.CommandExecutor}" />
                                 </Button.InputBindings>
                             </Button>
                         </DataTemplate>

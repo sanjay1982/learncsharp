@@ -1,21 +1,22 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 namespace Calculator.BLL.Functions
 {
-    public class SignChange : SingleArgumentFunction
+    public class SquareRoot : SingleArgumentFunction
     {
-        public SignChange() : base("+/-", 1)
+        public SquareRoot() : base("sqrt", 1)
         {
         }
 
         protected override object Calculate(double[] arguments)
         {
-            return arguments.First() * -1;
+            return Math.Sqrt(arguments.First());
         }
 
         protected override object Calculate(long[] arguments)
         {
-            return arguments.First() * -1;
+            return Math.Sqrt(arguments.First());
         }
     }
 }

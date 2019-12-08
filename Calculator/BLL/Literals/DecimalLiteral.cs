@@ -1,10 +1,9 @@
 ﻿using System.Globalization;
 using System.Linq;
+using Calculator.BLL.Contracts;
 
 namespace Calculator.BLL.Literals
 {
-    using Contracts;
-
     public class DecimalLiteral : BaseCommandAcceptor
     {
         private string _literal;

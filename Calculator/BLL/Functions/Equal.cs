@@ -1,7 +1,7 @@
-﻿namespace Calculator.BLL.Functions
-{
-    using Contracts;
+﻿using Calculator.BLL.Contracts;
 
+namespace Calculator.BLL.Functions
+{
     public class Equal : BaseFunction
     {
         public Equal() : base("=", 1)

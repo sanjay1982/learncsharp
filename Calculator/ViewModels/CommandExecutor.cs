@@ -1,33 +1,19 @@
-﻿using Calculator.BLL;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Windows.Input;
+using Calculator.BLL;
+using Calculator.BLL.Contracts;
 
 namespace Calculator.ViewModels
 {
-    using BLL.Contracts;
-
     public class CommandExecutor : ICommand, INotifyPropertyChanged
     {
-        private readonly ICommandAcceptorFactory _factory;
         private ICommandAcceptor _commandAcceptor;
-        private bool _enabled = true;
 
         public CommandExecutor()
         {
-            _factory = new CommandAcceptorFactory();
-            _commandAcceptor = _factory.CreateLiteral(null);
-        }
-
-        public bool Enabled
-        {
-            get => _enabled;
-            set
-            {
-                if (value == _enabled) return;
-                _enabled = value;
-                CanExecuteChanged?.Invoke(this, EventArgs.Empty);
-            }
+            ICommandAcceptorFactory factory = new CommandAcceptorFactory();
+            _commandAcceptor = factory.CreateLiteral(0);
         }
 
         public string Expression => _commandAcceptor.ExpressionString;
@@ -39,13 +25,13 @@ namespace Calculator.ViewModels
         public bool CanExecute(object parameter)
         {
             if (!(parameter is Command command)) return true;
-            return _commandAcceptor?.CanAccept(parameter as Command) ?? false;
+            return _commandAcceptor?.CanAccept(command) ?? false;
         }
 
         public void Execute(object parameter)
         {
             if (!(parameter is Command command)) return;
-            _commandAcceptor = _commandAcceptor?.Accept(parameter as Command);
+            _commandAcceptor = _commandAcceptor?.Accept(command);
             CanExecuteChanged?.Invoke(this, EventArgs.Empty);
             OnPropertyChanged(nameof(Expression));
             OnPropertyChanged(nameof(Value));

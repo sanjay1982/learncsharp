@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Calculator.BLL.Contracts;
 
 namespace Calculator.BLL.Functions
 {
-    using Contracts;
-
     public abstract class BaseFunction : BaseCommandAcceptor, ICalculatorFunction
     {
-        protected readonly List<ICommandAcceptor> _literals = new List<ICommandAcceptor>();
-        protected int _completedLiterals;
-        protected object _value;
+        protected readonly List<ICommandAcceptor> Literals = new List<ICommandAcceptor>();
+        private object _value;
+        protected int CompletedLiterals;
 
         protected BaseFunction(string name, int argumentCount)
         {
@@ -18,11 +17,17 @@ namespace Calculator.BLL.Functions
             ArgumentCount = argumentCount;
         }
 
-        public override string ExpressionString => string.Join(Name, _literals.Select(x => x.ExpressionString));
-        public override object Value => _value ?? _literals.LastOrDefault()?.Value ?? "0";
-        public string Name { get; }
+        public override string ExpressionString => string.Join(Name, Literals.Select(x => x.ExpressionString));
+        public override object Value => _value ?? Literals.LastOrDefault()?.Value ?? "0";
         public int ArgumentCount { get; }
-        protected object Calculate() => Calculate(_literals.Select(x => x.Value).ToArray());
+
+        public string Name { get; }
+
+        protected object Calculate()
+        {
+            return Calculate(Literals.Select(x => x.Value).ToArray());
+        }
+
         protected virtual object Calculate(object[] arguments)
         {
             if (arguments.Length != ArgumentCount) return null;
@@ -44,7 +49,8 @@ namespace Calculator.BLL.Functions
         public override bool CanAccept(Command command)
         {
             if (command == null) return false;
-            if (ArgumentCount > _literals.Count && command.Type != CommandType.Literal) return command.ArgumentCount == 1;
+            if (ArgumentCount > Literals.Count && command.Type != CommandType.Literal)
+                return command.ArgumentCount <= 1;
             return true;
         }
 
@@ -55,16 +61,19 @@ namespace Calculator.BLL.Functions
             {
                 if (command.ArgumentCount == 1)
                 {
-                   _literals[_literals.Count-1]=Factory.Create(command, _literals.LastOrDefault());
+                    if (CompletedLiterals == Literals.Count && ArgumentCount > Literals.Count)
+                        Literals.Add(Factory.CreateLiteral(0));
+                    Literals[Literals.Count - 1] = Factory.Create(command, Literals.LastOrDefault());
                     return this;
                 }
+
                 _value = Calculate();
                 return Factory.Create(command, this);
             }
 
-            if (_completedLiterals == _literals.Count) _literals.Add(Factory.Create(command, this));
+            if (CompletedLiterals == Literals.Count) Literals.Add(Factory.Create(command, this));
 
-            _literals.Last().Accept(command);
+            Literals.Last().Accept(command);
 
             return this;
         }
@@ -72,22 +81,9 @@ namespace Calculator.BLL.Functions
         protected override ICommandAcceptor OnInitialize(ICommandAcceptor previousAcceptor)
         {
             if (ArgumentCount == 0) return Factory.CreateLiteral(0);
-            _literals.Add(previousAcceptor);
-            _completedLiterals = 1;
+            Literals.Add(previousAcceptor);
+            CompletedLiterals = 1;
             return this;
-        }
-    }
-    public abstract class SingleArgumentFunction : BaseFunction
-    {
-        protected SingleArgumentFunction(string name, int argumentCount) : base(name, argumentCount)
-        {
-        }
-
-        protected override ICommandAcceptor OnInitialize(ICommandAcceptor previousAcceptor)
-        {
-            _literals.Add(previousAcceptor);
-            _completedLiterals = 1;
-            return Factory.CreateLiteral(Calculate());
         }
     }
 }

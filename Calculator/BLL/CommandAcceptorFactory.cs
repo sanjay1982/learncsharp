@@ -1,8 +1,7 @@
-﻿using Calculator.BLL.Contracts;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
+using Calculator.BLL.Contracts;
 
 namespace Calculator.BLL
 {
@@ -15,8 +14,13 @@ namespace Calculator.BLL
                 x.GetInterfaces().Contains(typeof(ICalculatorFunction)) && !x.IsAbstract)
             .Select(y =>
             {
-                Func<ICalculatorFunction> func = () => { return y.GetInstance() as ICalculatorFunction; };
-                return func;
+                ICalculatorFunction Create()
+                {
+                    y.GetConstructor()
+                    return y.GetInstance() as ICalculatorFunction;
+                }
+
+                return (Func<ICalculatorFunction>)Create;
             }).ToDictionary(z => z.Invoke().Name, z => z);
 
         private static readonly List<Func<object, ICommandAcceptor>> Literals = typeof(CommandAcceptorFactory).Assembly
@@ -25,15 +29,20 @@ namespace Calculator.BLL
                 !x.GetInterfaces().Contains(typeof(ICalculatorFunction)) && !x.IsAbstract)
             .Select(y =>
             {
-                Func<object, ICommandAcceptor> func = (param) => { return y.GetInstance<object>(param) as ICommandAcceptor; };
-                return func;
+                ICommandAcceptor Create(object param)
+                {
+                    return y.GetInstance(param) as ICommandAcceptor;
+                }
+
+                return (Func<object, ICommandAcceptor>)Create;
             }).ToList();
 
         public ICommandAcceptor Create(Command command, ICommandAcceptor previousAcceptor)
         {
             if (command.Type == CommandType.Function)
             {
-                if (Functions.TryGetValue(command.Value, out var factory)) return Initialize(factory.Invoke() as ICommandAcceptor, previousAcceptor);
+                if (Functions.TryGetValue(command.Value, out var factory))
+                    return Initialize(factory.Invoke() as ICommandAcceptor, previousAcceptor);
             }
             else
             {

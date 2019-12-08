@@ -36,13 +36,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
@@ -63,11 +58,12 @@
     <Compile Include="BLL\Functions\Equal.cs" />
     <Compile Include="BLL\Contracts\ICalculatorFunction.cs" />
     <Compile Include="BLL\Functions\Multiply.cs" />
+    <Compile Include="BLL\Functions\SquareRoot.cs" />
     <Compile Include="BLL\Functions\SignChange.cs" />
     <Compile Include="BLL\Functions\BaseFunction.cs" />
+    <Compile Include="BLL\Functions\SingleArgumentFunction.cs" />
     <Compile Include="BLL\Functions\Subtract.cs" />
     <Compile Include="BLL\Contracts\ICommandAcceptorFactory.cs" />
-    <Compile Include="BLL\Contracts\IExpressionHandler.cs" />
     <Compile Include="BLL\TypeExtensions.cs" />
     <Compile Include="ViewModels\CalculatorViewModel.cs" />
     <Compile Include="BLL\Command.cs" />
