@@ -1,7 +1,6 @@
-﻿using System.Windows.Input;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
-namespace Calculator.BLL
+namespace CalculatorLib.BLL
 {
     public class Command
     {
@@ -9,7 +8,7 @@ namespace Calculator.BLL
 
         [XmlAttribute] public CommandType Type { get; set; }
 
-        [XmlAttribute(AttributeName = "Key")] public Key KeyBoardKey { get; set; }
+        [XmlAttribute(AttributeName = "Key")] public string KeyBoardKey { get; set; }
 
         [XmlAttribute] public string Value { get; set; }
 

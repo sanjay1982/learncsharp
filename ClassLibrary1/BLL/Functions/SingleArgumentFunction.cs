@@ -1,6 +1,6 @@
-﻿using Calculator.BLL.Contracts;
+﻿using CalculatorLib.BLL.Contracts;
 
-namespace Calculator.BLL.Functions
+namespace CalculatorLib.BLL.Functions
 {
     public abstract class SingleArgumentFunction : BaseFunction
     {

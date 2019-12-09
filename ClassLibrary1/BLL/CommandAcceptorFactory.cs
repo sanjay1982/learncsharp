@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Calculator.BLL.Contracts;
+using CalculatorLib.BLL.Contracts;
 
-namespace Calculator.BLL
+namespace CalculatorLib.BLL
 {
     public class CommandAcceptorFactory : ICommandAcceptorFactory
     {
@@ -16,11 +16,10 @@ namespace Calculator.BLL
             {
                 ICalculatorFunction Create()
                 {
-                    y.GetConstructor()
                     return y.GetInstance() as ICalculatorFunction;
                 }
 
-                return (Func<ICalculatorFunction>)Create;
+                return (Func<ICalculatorFunction>) Create;
             }).ToDictionary(z => z.Invoke().Name, z => z);
 
         private static readonly List<Func<object, ICommandAcceptor>> Literals = typeof(CommandAcceptorFactory).Assembly
@@ -34,7 +33,7 @@ namespace Calculator.BLL
                     return y.GetInstance(param) as ICommandAcceptor;
                 }
 
-                return (Func<object, ICommandAcceptor>)Create;
+                return (Func<object, ICommandAcceptor>) Create;
             }).ToList();
 
         public ICommandAcceptor Create(Command command, ICommandAcceptor previousAcceptor)

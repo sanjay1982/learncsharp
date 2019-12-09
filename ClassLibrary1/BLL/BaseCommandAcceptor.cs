@@ -1,6 +1,6 @@
-﻿using Calculator.BLL.Contracts;
+﻿using CalculatorLib.BLL.Contracts;
 
-namespace Calculator.BLL
+namespace CalculatorLib.BLL
 {
     public abstract class BaseCommandAcceptor : ICommandAcceptor
     {

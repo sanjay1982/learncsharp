@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
-using Calculator.BLL;
+using CalculatorLib.BLL;
 
-namespace Calculator.ViewModels
+namespace CalculatorLib.ViewModels
 {
     public class CalculatorViewModel
     {
@@ -32,7 +32,7 @@ namespace Calculator.ViewModels
             }
 
             var assembly = typeof(CalculatorViewModel).Assembly;
-            const string resourceName = "Calculator.ViewModels.SimpleCalculator.xml";
+            const string resourceName = "CalculatorLib.ViewModels.SimpleCalculator.xml";
 
             using (var stream = assembly.GetManifestResourceStream(resourceName))
             {

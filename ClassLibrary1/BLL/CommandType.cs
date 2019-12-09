@@ -1,4 +1,4 @@
-﻿namespace Calculator.BLL
+﻿namespace CalculatorLib.BLL
 {
     public enum CommandType
     {

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows.Input;
-using Calculator.BLL;
-using Calculator.BLL.Contracts;
+using CalculatorLib.BLL;
+using CalculatorLib.BLL.Contracts;
 
-namespace Calculator.ViewModels
+namespace CalculatorLib.ViewModels
 {
     public class CommandExecutor : ICommand, INotifyPropertyChanged
     {

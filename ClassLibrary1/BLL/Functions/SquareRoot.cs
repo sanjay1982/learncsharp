@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace Calculator.BLL.Functions
+namespace CalculatorLib.BLL.Functions
 {
     public class SquareRoot : SingleArgumentFunction
     {

@@ -1,4 +1,4 @@
-﻿namespace Calculator.BLL.Contracts
+﻿namespace CalculatorLib.BLL.Contracts
 {
     public interface ICalculatorFunction
     {

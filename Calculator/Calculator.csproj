@@ -50,28 +50,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="BLL\BaseCommandAcceptor.cs" />
-    <Compile Include="BLL\CommandAcceptorFactory.cs" />
-    <Compile Include="BLL\Functions\Add.cs" />
-    <Compile Include="BLL\Functions\Clear.cs" />
-    <Compile Include="BLL\Functions\Divide.cs" />
-    <Compile Include="BLL\Functions\Equal.cs" />
-    <Compile Include="BLL\Contracts\ICalculatorFunction.cs" />
-    <Compile Include="BLL\Functions\Multiply.cs" />
-    <Compile Include="BLL\Functions\SquareRoot.cs" />
-    <Compile Include="BLL\Functions\SignChange.cs" />
-    <Compile Include="BLL\Functions\BaseFunction.cs" />
-    <Compile Include="BLL\Functions\SingleArgumentFunction.cs" />
-    <Compile Include="BLL\Functions\Subtract.cs" />
-    <Compile Include="BLL\Contracts\ICommandAcceptorFactory.cs" />
-    <Compile Include="BLL\TypeExtensions.cs" />
-    <Compile Include="ViewModels\CalculatorViewModel.cs" />
-    <Compile Include="BLL\Command.cs" />
-    <Compile Include="ViewModels\CommandExecutor.cs" />
-    <Compile Include="BLL\Commands.cs" />
-    <Compile Include="BLL\CommandType.cs" />
-    <Compile Include="BLL\Literals\DecimalLiteral.cs" />
-    <Compile Include="BLL\Contracts\ICommandAcceptor.cs" />
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -112,10 +90,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ViewModels\SimpleCalculator.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
+    <ProjectReference Include="..\ClassLibrary1\CalculatorLib.csproj">
+      <Project>{84c8df93-36b0-422b-a162-07f0ce150aca}</Project>
+      <Name>CalculatorLib</Name>
+    </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,4 +1,4 @@
-﻿namespace Calculator.BLL.Functions
+﻿namespace CalculatorLib.BLL.Functions
 {
     public class Clear : BaseFunction
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace Calculator.BLL
+namespace CalculatorLib.BLL
 {
     public static class TypeExtensions
     {
@@ -89,7 +89,7 @@ namespace Calculator.BLL
                 // Bail out if we've already cached the instance creation method:
                 if (InstanceCreationMethods.ContainsKey(type)) return;
 
-                var argumentTypes = new[] { typeof(TArg1), typeof(TArg2), typeof(TArg3) };
+                var argumentTypes = new[] {typeof(TArg1), typeof(TArg2), typeof(TArg3)};
 
                 // Get a collection of the constructor argument Types we've been given; ignore any 
                 // arguments which are of the 'ignore this' Type:

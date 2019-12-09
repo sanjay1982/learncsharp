@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Serialization;
 
-namespace Calculator.BLL
+namespace CalculatorLib.BLL
 {
     [XmlRoot(ElementName = "Commands")]
     public class Commands

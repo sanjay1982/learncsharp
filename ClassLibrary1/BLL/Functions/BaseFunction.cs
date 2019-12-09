@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Calculator.BLL.Contracts;
+using CalculatorLib.BLL.Contracts;
 
-namespace Calculator.BLL.Functions
+namespace CalculatorLib.BLL.Functions
 {
     public abstract class BaseFunction : BaseCommandAcceptor, ICalculatorFunction
     {

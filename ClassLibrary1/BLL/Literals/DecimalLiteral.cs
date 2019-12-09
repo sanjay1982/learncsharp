@@ -1,8 +1,8 @@
 ﻿using System.Globalization;
 using System.Linq;
-using Calculator.BLL.Contracts;
+using CalculatorLib.BLL.Contracts;
 
-namespace Calculator.BLL.Literals
+namespace CalculatorLib.BLL.Literals
 {
     public class DecimalLiteral : BaseCommandAcceptor
     {
