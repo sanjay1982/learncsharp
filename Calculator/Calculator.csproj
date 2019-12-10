@@ -90,8 +90,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ClassLibrary1\CalculatorLib.csproj">
-      <Project>{84c8df93-36b0-422b-a162-07f0ce150aca}</Project>
+    <ProjectReference Include="..\CalculatorLib\CalculatorLib.csproj">
+      <Project>{ca1d5727-f43c-42dd-b4ba-9334c517c3b0}</Project>
       <Name>CalculatorLib</Name>
     </ProjectReference>
   </ItemGroup>
