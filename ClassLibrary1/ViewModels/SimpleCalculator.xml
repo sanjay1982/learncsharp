@@ -17,8 +17,9 @@
   <Command Text="*" Value="*" Type="Function" Key="Multiply" ArgumentCount="2" />
   <Command Text="/" Value="/" Type="Function" Key="Divide" ArgumentCount="2" />
   <Command Text="+/-" Value="+/-" Type="Function" Key="None" ArgumentCount="1" />
-  <Command Text="sqrt" Value="sqrt" Type="Function" Key="None" ArgumentCount="1" />
   <Command Text="=" Value="=" Type="Function" Key="Enter" ArgumentCount="0" />
 
   <Command Text="C" Value="Clear" Type="Function" Key="Escape" />
+
+
 </Commands>

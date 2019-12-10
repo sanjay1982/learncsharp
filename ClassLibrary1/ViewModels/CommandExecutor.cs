@@ -6,13 +6,18 @@ using CalculatorLib.BLL.Contracts;
 
 namespace CalculatorLib.ViewModels
 {
-    public class CommandExecutor : ICommand, INotifyPropertyChanged
+    public interface ICommandExecutor : ICommand
+    {
+        string Expression { get; }
+        string Value { get; }
+    }
+
+    public class CommandExecutor : INotifyPropertyChanged, ICommandExecutor
     {
         private ICommandAcceptor _commandAcceptor;
 
-        public CommandExecutor()
+        public CommandExecutor(ICommandAcceptorFactory factory)
         {
-            ICommandAcceptorFactory factory = new CommandAcceptorFactory();
             _commandAcceptor = factory.CreateLiteral(0);
         }
 

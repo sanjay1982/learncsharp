@@ -1,18 +1,39 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
+using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Xml.Serialization;
 using CalculatorLib.BLL;
 
 namespace CalculatorLib.ViewModels
 {
-    public class CalculatorViewModel
+    public class CalculatorViewModel : INotifyPropertyChanged
     {
+        private readonly Dictionary<string, string[]> _views;
         private Commands _commands;
 
-        public CalculatorViewModel()
+        public CalculatorViewModel() : this(
+            new Dictionary<string, string[]>
+            {
+                {
+                    "Simple",
+                    new[] {@"ViewModels\SimpleCalculator.xml", "CalculatorLib.ViewModels.SimpleCalculator.xml"}
+                },
+                {"Complex", new[] {@"ViewModels\Complex.xml", "CalculatorLib.ViewModels.Complex.xml"}}
+            },
+            new CommandExecutor(new CommandAcceptorFactory()))
         {
-            LoadCommands();
         }
+
+        public CalculatorViewModel(Dictionary<string, string[]> views, ICommandExecutor commandHandler)
+        {
+            _views = views;
+            CommandExecutor = commandHandler;
+            LoadView(Views.First());
+        }
+
+        public IList<string> Views => _views.Keys.ToList();
 
         public List<Command> Commands
         {
@@ -20,34 +41,49 @@ namespace CalculatorLib.ViewModels
             set => _commands.CommandList = value;
         }
 
-        public CommandExecutor CommandExecutor { get; } = new CommandExecutor();
+        public ICommandExecutor CommandExecutor { get; }
 
-        private void LoadCommands()
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void LoadView(string view)
         {
-            const string path = @"ViewModels\SimpleCalculator.xml";
-            if (File.Exists(path))
+            if (!_views.TryGetValue(view, out var paths)) return;
+
+            if (paths.Any(calculatorXmlPath => LoadCommandsFromStream(OpenStream(calculatorXmlPath)))
+            )
+                OnPropertyChanged(nameof(Commands));
+
+            Stream OpenStream(string path)
             {
-                LoadCommandsFromStream(File.OpenRead(path));
-                return;
+                return File.Exists(path)
+                    ? File.OpenRead(path)
+                    : typeof(CalculatorViewModel).Assembly.GetManifestResourceStream(path);
             }
 
-            var assembly = typeof(CalculatorViewModel).Assembly;
-            const string resourceName = "CalculatorLib.ViewModels.SimpleCalculator.xml";
-
-            using (var stream = assembly.GetManifestResourceStream(resourceName))
+            bool LoadCommandsFromStream(Stream stream)
             {
-                LoadCommandsFromStream(stream);
-            }
-
-            void LoadCommandsFromStream(Stream stream)
-            {
-                var serializer = new XmlSerializer(typeof(Commands));
-
-                using (var reader = new StreamReader(stream))
+                if (stream == null) return false;
+                try
                 {
-                    _commands = (Commands)serializer.Deserialize(reader);
+                    var serializer = new XmlSerializer(typeof(Commands));
+
+                    using (var reader = new StreamReader(stream))
+                    {
+                        _commands = (Commands)serializer.Deserialize(reader);
+                    }
                 }
+                catch
+                {
+                    return false;
+                }
+
+                return true;
             }
+        }
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Commands>
+  <Command Text="1" Value="1" Type="Literal" Key="D1" />
+  <Command Text="2" Value="2" Type="Literal" Key="D2" />
+  <Command Text="3" Value="3" Type="Literal" Key="D3" />
+  <Command Text="4" Value="4" Type="Literal" Key="D4" />
+  <Command Text="5" Value="5" Type="Literal" Key="D5" />
+  <Command Text="6" Value="6" Type="Literal" Key="D6" />
+  <Command Text="7" Value="7" Type="Literal" Key="D7" />
+  <Command Text="8" Value="8" Type="Literal" Key="D8" />
+  <Command Text="9" Value="9" Type="Literal" Key="D9" />
+  <Command Text="0" Value="0" Type="Literal" Key="D0" />
+  <Command Text="." Value="." Type="Literal" Key="Decimal" />
+  <Command Text="+" Value="+" Type="Function" Key="Add" ArgumentCount="2" />
+  <Command Text="-" Value="-" Type="Function" Key="Subtract" ArgumentCount="2" />
+  <Command Text="*" Value="*" Type="Function" Key="Multiply" ArgumentCount="2" />
+  <Command Text="/" Value="/" Type="Function" Key="Divide" ArgumentCount="2" />
+  <Command Text="+/-" Value="+/-" Type="Function" Key="None" ArgumentCount="1" />
+  <Command Text="=" Value="=" Type="Function" Key="Enter" ArgumentCount="0" />
+
+  <Command Text="C" Value="Clear" Type="Function" Key="Escape" />
+
+
+  <Command Text="Min" Value="System.Math.Min" Type="Function" Key="None" ArgumentCount="2" />
+  <Command Text="Acos" Value="System.Math.Acos" Type="Function" Key="None" ArgumentCount="1" />
+  <Command Text="Asin" Value="System.Math.Asin" Type="Function" Key="None" ArgumentCount="1" />
+  <Command Text="Atan" Value="System.Math.Atan" Type="Function" Key="None" ArgumentCount="1" />
+  <Command Text="Atan2" Value="System.Math.Atan2" Type="Function" Key="None" ArgumentCount="2" />
+  <Command Text="Ceiling" Value="System.Math.Ceiling" Type="Function" Key="None" ArgumentCount="1" />
+  <Command Text="Cos" Value="System.Math.Cos" Type="Function" Key="None" ArgumentCount="1" />
+  <Command Text="Cosh" Value="System.Math.Cosh" Type="Function" Key="None" ArgumentCount="1" />
+  <Command Text="Floor" Value="System.Math.Floor" Type="Function" Key="None" ArgumentCount="1" />
+  <Command Text="Sin" Value="System.Math.Sin" Type="Function" Key="None" ArgumentCount="1" />
+  <Command Text="Tan" Value="System.Math.Tan" Type="Function" Key="None" ArgumentCount="1" />
+  <Command Text="Sinh" Value="System.Math.Sinh" Type="Function" Key="None" ArgumentCount="1" />
+  <Command Text="Tanh" Value="System.Math.Tanh" Type="Function" Key="None" ArgumentCount="1" />
+  <Command Text="Round" Value="System.Math.Round" Type="Function" Key="None" ArgumentCount="1" />
+  <Command Text="Truncate" Value="System.Math.Truncate" Type="Function" Key="None" ArgumentCount="1" />
+  <Command Text="Sqrt" Value="System.Math.Sqrt" Type="Function" Key="None" ArgumentCount="1" />
+  <Command Text="Log" Value="System.Math.Log" Type="Function" Key="None" ArgumentCount="1" />
+  <Command Text="Log10" Value="System.Math.Log10" Type="Function" Key="None" ArgumentCount="1" />
+  <Command Text="Exp" Value="System.Math.Exp" Type="Function" Key="None" ArgumentCount="1" />
+  <Command Text="Pow" Value="System.Math.Pow" Type="Function" Key="None" ArgumentCount="2" />
+  <Command Text="IEEERemainder" Value="System.Math.IEEERemainder" Type="Function" Key="None" ArgumentCount="2" />
+  <Command Text="Abs" Value="System.Math.Abs" Type="Function" Key="None" ArgumentCount="1" />
+  <Command Text="Max" Value="System.Math.Max" Type="Function" Key="None" ArgumentCount="2" />
+  <Command Text="Min" Value="System.Math.Min" Type="Function" Key="None" ArgumentCount="2" />
+  <Command Text="Log" Value="System.Math.Log" Type="Function" Key="None" ArgumentCount="2" />
+  <Command Text="Sign" Value="System.Math.Sign" Type="Function" Key="None" ArgumentCount="1" />
+  <Command Text="BigMul" Value="System.Math.BigMul" Type="Function" Key="None" ArgumentCount="2" />
+  <Command Text="DivRem" Value="System.Math.DivRem" Type="Function" Key="None" ArgumentCount="3" />
+</Commands>

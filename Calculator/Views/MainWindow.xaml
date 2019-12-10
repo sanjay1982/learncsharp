@@ -10,40 +10,49 @@
     <Window.DataContext>
         <viewModels:CalculatorViewModel />
     </Window.DataContext>
-    <Viewbox>
-        <StackPanel Margin="5">
-            <StackPanel x:Name="Display" HorizontalAlignment="Left" Margin="10,0,0,0">
-                <TextBlock Text="{Binding CommandExecutor.Expression}" FontWeight="SemiBold" FontSize="20"
-                           HorizontalAlignment="Left" Width="Auto" />
-                <TextBlock Text="{Binding CommandExecutor.Value}" FontWeight="Medium" FontSize="48"
-                           HorizontalAlignment="Left" />
-            </StackPanel>
-            <StackPanel x:Name="Commands" HorizontalAlignment="Center">
-                <ItemsControl x:Name="CommandsListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                              ItemsSource="{Binding Commands}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_File">
+                <MenuItem Header="_Exit" Click="MenuItem_Exit" />
+            </MenuItem>
+            <MenuItem Header="_View" ItemsSource="{Binding Views}" Click="MenuItem_LoadView" />
+        </Menu>
+        <Viewbox>
 
-                            <WrapPanel Orientation="Horizontal" MaxWidth="270" />
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
+            <StackPanel Margin="5">
+                <StackPanel x:Name="Display" HorizontalAlignment="Left" Margin="10,0,0,0">
+                    <TextBlock Text="{Binding CommandExecutor.Expression}" FontWeight="SemiBold" FontSize="20"
+                               HorizontalAlignment="Left" Width="Auto" />
+                    <TextBlock Text="{Binding CommandExecutor.Value}" FontWeight="Medium" FontSize="48"
+                               HorizontalAlignment="Left" />
+                </StackPanel>
+                <StackPanel x:Name="Commands" HorizontalAlignment="Center">
+                    <ItemsControl x:Name="CommandsListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                  ItemsSource="{Binding Commands}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
 
-                            <Button MinWidth="50" MinHeight="50" Margin="2"
-                                    CommandParameter="{Binding}"
-                                    Command="{Binding ElementName=CalculatorMainWindow, Path=DataContext.CommandExecutor}">
-                                <TextBlock Text="{Binding Text}" />
-                                <Button.InputBindings>
-                                    <KeyBinding Key="{Binding KeyBoardKey}"
-                                                CommandParameter="{Binding}"
-                                                Command="{Binding ElementName=CalculatorMainWindow, Path=DataContext.CommandExecutor}" />
-                                </Button.InputBindings>
-                            </Button>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
+                                <WrapPanel Orientation="Horizontal" MaxWidth="270" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+
+                                <Button MinWidth="50" MinHeight="50" Margin="2"
+                                        CommandParameter="{Binding}"
+                                        Command="{Binding ElementName=CalculatorMainWindow, Path=DataContext.CommandExecutor}">
+                                    <TextBlock Text="{Binding Text}" />
+                                    <Button.InputBindings>
+                                        <KeyBinding Key="{Binding KeyBoardKey}"
+                                                    CommandParameter="{Binding}"
+                                                    Command="{Binding ElementName=CalculatorMainWindow, Path=DataContext.CommandExecutor}" />
+                                    </Button.InputBindings>
+                                </Button>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
             </StackPanel>
-        </StackPanel>
-    </Viewbox>
+        </Viewbox>
+    </DockPanel>
 </Window>

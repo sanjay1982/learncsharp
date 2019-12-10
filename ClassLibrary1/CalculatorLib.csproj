@@ -5,10 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ViewModels\Complex.xml" />
     <None Remove="ViewModels\SimpleCalculator.xml" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="ViewModels\Complex.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="ViewModels\SimpleCalculator.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>

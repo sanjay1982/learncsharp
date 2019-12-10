@@ -10,6 +10,7 @@ namespace CalculatorLib.BLL.Functions
 
         protected override ICommandAcceptor OnInitialize(ICommandAcceptor previousAcceptor)
         {
+            if (ArgumentCount > 1) return base.OnInitialize(previousAcceptor);
             Literals.Add(previousAcceptor);
             CompletedLiterals = 1;
             return Factory.CreateLiteral(Calculate());
