@@ -2,13 +2,17 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using CalculatorLib.BLL.Contracts;
 using CalculatorLib.BLL.Functions;
+using log4net;
 
 namespace CalculatorLib.BLL
 {
     public class CommandAcceptorFactory : ICommandAcceptorFactory
     {
+        private static readonly ILog Logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         private static readonly Dictionary<string, Func<ICalculatorFunction>> Functions = typeof(CommandAcceptorFactory)
             .Assembly
             .GetTypes().Where(x =>
