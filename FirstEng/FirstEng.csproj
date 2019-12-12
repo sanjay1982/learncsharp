@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Veldrid" Version="4.7.0" />
+    <PackageReference Include="Veldrid.ImageSharp" Version="4.7.0" />
+    <PackageReference Include="Veldrid.ImGui" Version="5.72.0" />
+    <PackageReference Include="Veldrid.MetalBindings" Version="4.7.0" />
+    <PackageReference Include="Veldrid.OpenGLBindings" Version="4.7.0" />
+    <PackageReference Include="Veldrid.Sdl2" Version="4.7.0" />
+    <PackageReference Include="Veldrid.SPIRV" Version="1.0.12" />
+    <PackageReference Include="Veldrid.StartupUtilities" Version="4.7.0" />
+    <PackageReference Include="Veldrid.Utilities" Version="4.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Systems\" />
+  </ItemGroup>
+
+</Project>
