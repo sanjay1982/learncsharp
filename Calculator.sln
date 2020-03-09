@@ -7,20 +7,40 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator", "Calculator\Ca
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalculatorLib", "CalculatorLib\CalculatorLib.csproj", "{CA1D5727-F43C-42DD-B4BA-9334C517C3B0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirstEng", "FirstEng\FirstEng.csproj", "{664ECF26-A706-4929-BE37-3221ABD3FDC5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
 		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{6364FDCA-3AB7-49CB-B1B7-867E9A1FE19D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6364FDCA-3AB7-49CB-B1B7-867E9A1FE19D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6364FDCA-3AB7-49CB-B1B7-867E9A1FE19D}.Debug|x64.ActiveCfg = Debug|x64
+		{6364FDCA-3AB7-49CB-B1B7-867E9A1FE19D}.Debug|x64.Build.0 = Debug|x64
 		{6364FDCA-3AB7-49CB-B1B7-867E9A1FE19D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6364FDCA-3AB7-49CB-B1B7-867E9A1FE19D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6364FDCA-3AB7-49CB-B1B7-867E9A1FE19D}.Release|x64.ActiveCfg = Release|x64
+		{6364FDCA-3AB7-49CB-B1B7-867E9A1FE19D}.Release|x64.Build.0 = Release|x64
 		{CA1D5727-F43C-42DD-B4BA-9334C517C3B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CA1D5727-F43C-42DD-B4BA-9334C517C3B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA1D5727-F43C-42DD-B4BA-9334C517C3B0}.Debug|x64.ActiveCfg = Debug|x64
+		{CA1D5727-F43C-42DD-B4BA-9334C517C3B0}.Debug|x64.Build.0 = Debug|x64
 		{CA1D5727-F43C-42DD-B4BA-9334C517C3B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CA1D5727-F43C-42DD-B4BA-9334C517C3B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA1D5727-F43C-42DD-B4BA-9334C517C3B0}.Release|x64.ActiveCfg = Release|x64
+		{CA1D5727-F43C-42DD-B4BA-9334C517C3B0}.Release|x64.Build.0 = Release|x64
+		{664ECF26-A706-4929-BE37-3221ABD3FDC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{664ECF26-A706-4929-BE37-3221ABD3FDC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{664ECF26-A706-4929-BE37-3221ABD3FDC5}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{664ECF26-A706-4929-BE37-3221ABD3FDC5}.Debug|x64.Build.0 = Debug|Any CPU
+		{664ECF26-A706-4929-BE37-3221ABD3FDC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{664ECF26-A706-4929-BE37-3221ABD3FDC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{664ECF26-A706-4929-BE37-3221ABD3FDC5}.Release|x64.ActiveCfg = Release|Any CPU
+		{664ECF26-A706-4929-BE37-3221ABD3FDC5}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
