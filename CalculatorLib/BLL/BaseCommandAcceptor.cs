@@ -1,9 +1,12 @@
-﻿using CalculatorLib.BLL.Contracts;
+﻿using System.Reflection;
+using CalculatorLib.BLL.Contracts;
+using log4net;
 
 namespace CalculatorLib.BLL
 {
     public abstract class BaseCommandAcceptor : ICommandAcceptor
     {
+        private static readonly ILog Logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         protected ICommandAcceptorFactory Factory { get; private set; }
         public abstract object Value { get; }
 
@@ -14,6 +17,7 @@ namespace CalculatorLib.BLL
         public ICommandAcceptor Initialize(ICommandAcceptorFactory commandAcceptorFactory,
             ICommandAcceptor previousAcceptor)
         {
+            Logger.Debug($"Initialized command acceptor {GetType().Name}");
             Factory = commandAcceptorFactory;
             return OnInitialize(previousAcceptor);
         }

@@ -1,17 +1,10 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Windows.Input;
 using CalculatorLib.BLL;
 using CalculatorLib.BLL.Contracts;
 
 namespace CalculatorLib.ViewModels
 {
-    public interface ICommandExecutor : ICommand
-    {
-        string Expression { get; }
-        string Value { get; }
-    }
-
     public class CommandExecutor : INotifyPropertyChanged, ICommandExecutor
     {
         private ICommandAcceptor _commandAcceptor;

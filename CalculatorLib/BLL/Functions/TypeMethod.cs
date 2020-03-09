@@ -9,6 +9,8 @@ namespace CalculatorLib.BLL.Functions
         private readonly MethodInfo[] _methodInfos;
         private readonly Type _type;
 
+        private object _instance;
+
         public TypeMethod(Type type, MethodInfo[] methodInfos) : base($" {methodInfos.First().Name} ",
             methodInfos.First().GetParameters().Length)
         {
@@ -16,7 +18,7 @@ namespace CalculatorLib.BLL.Functions
             _methodInfos = methodInfos;
         }
 
-        public object TypeInstance => _type.GetInstance();
+        private object TypeInstance => _instance = _instance ?? _type.GetInstance();
 
         protected override object Calculate(double[] arguments)
         {

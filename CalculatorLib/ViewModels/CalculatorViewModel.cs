@@ -69,7 +69,7 @@ namespace CalculatorLib.ViewModels
 
                     using (var reader = new StreamReader(stream))
                     {
-                        _commands = (Commands)serializer.Deserialize(reader);
+                        _commands = (Commands) serializer.Deserialize(reader);
                     }
                 }
                 catch
