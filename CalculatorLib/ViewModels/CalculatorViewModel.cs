@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using CalculatorLib.BLL;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Xml.Serialization;
-using CalculatorLib.BLL;
 
 namespace CalculatorLib.ViewModels
 {
@@ -69,7 +69,7 @@ namespace CalculatorLib.ViewModels
 
                     using (var reader = new StreamReader(stream))
                     {
-                        _commands = (Commands) serializer.Deserialize(reader);
+                        _commands = (Commands)serializer.Deserialize(reader);
                     }
                 }
                 catch

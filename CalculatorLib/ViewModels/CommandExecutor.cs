@@ -1,7 +1,7 @@
-﻿using System;
-using System.ComponentModel;
-using CalculatorLib.BLL;
+﻿using CalculatorLib.BLL;
 using CalculatorLib.BLL.Contracts;
+using System;
+using System.ComponentModel;
 
 namespace CalculatorLib.ViewModels
 {

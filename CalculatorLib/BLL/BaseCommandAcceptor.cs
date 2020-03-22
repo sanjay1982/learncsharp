@@ -1,6 +1,6 @@
-﻿using System.Reflection;
-using CalculatorLib.BLL.Contracts;
+﻿using CalculatorLib.BLL.Contracts;
 using log4net;
+using System.Reflection;
 
 namespace CalculatorLib.BLL
 {

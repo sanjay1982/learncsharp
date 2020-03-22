@@ -1,7 +1,7 @@
-﻿using System;
+﻿using CalculatorLib.BLL.Contracts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using CalculatorLib.BLL.Contracts;
 
 namespace CalculatorLib.BLL.Functions
 {

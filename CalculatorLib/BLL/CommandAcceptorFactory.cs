@@ -1,10 +1,10 @@
-﻿using System;
+﻿using CalculatorLib.BLL.Contracts;
+using CalculatorLib.BLL.Functions;
+using log4net;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using CalculatorLib.BLL.Contracts;
-using CalculatorLib.BLL.Functions;
-using log4net;
 
 namespace CalculatorLib.BLL
 {
@@ -25,14 +25,14 @@ namespace CalculatorLib.BLL
                     return y.GetInstance() as ICalculatorFunction;
                 }
 
-                return (Func<ICalculatorFunction>) Create;
+                return (Func<ICalculatorFunction>)Create;
             }).ToDictionary(z => z.Invoke().Name, z => z);
 
         private static readonly List<Func<object, ICommandAcceptor>> Literals = typeof(CommandAcceptorFactory).Assembly
             .GetTypes().Where(x =>
                 x.GetInterfaces().Contains(typeof(ICommandAcceptor)) &&
                 !x.GetInterfaces().Contains(typeof(ICalculatorFunction)) && !x.IsAbstract &&
-                x.GetConstructor(new[] {typeof(object)}) != null)
+                x.GetConstructor(new[] { typeof(object) }) != null)
             .Select(y =>
             {
                 ICommandAcceptor Create(object param)
@@ -40,7 +40,7 @@ namespace CalculatorLib.BLL
                     return y.GetInstance(param) as ICommandAcceptor;
                 }
 
-                return (Func<object, ICommandAcceptor>) Create;
+                return (Func<object, ICommandAcceptor>)Create;
             }).ToList();
 
         public ICommandAcceptor Create(Command command, ICommandAcceptor previousAcceptor)

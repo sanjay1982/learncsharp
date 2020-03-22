@@ -1,6 +1,6 @@
-﻿using System.Globalization;
+﻿using CalculatorLib.BLL.Contracts;
+using System.Globalization;
 using System.Linq;
-using CalculatorLib.BLL.Contracts;
 
 namespace CalculatorLib.BLL.Literals
 {
